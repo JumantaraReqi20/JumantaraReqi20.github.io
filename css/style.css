@@ -32,7 +32,8 @@ nav .logo {
 
 nav .logo a{
   text-decoration: none;
-  color: white;
+  color: rgb(48, 62, 168);
+  font-style: italic;
 }
 
 nav ul li a {
@@ -143,6 +144,25 @@ overflow: hidden;
   background-color: #9ACD32;
   margin-top: -4px;
 }
+
+.Tabel{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+table{
+  border: 1;
+  border-color: aliceblue;
+  border-collapse: collapse;
+}
+
+table td{
+  padding: 10px;
+  color: rgb(53, 22, 149);
+}
+
 
 .MottoHidup p{
   background-color: white;
