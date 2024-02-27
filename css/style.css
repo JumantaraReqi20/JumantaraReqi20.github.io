@@ -3,40 +3,47 @@
   padding: 0;
 }
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   overflow-x: hidden;
 }
 /*navbar*/
 nav {
   display: flex;
-  background-color: coral;
+  background-color: #9ACD32;
   justify-content: space-around;
-  /* padding: 20px 0; atas bawah 20  kiri kanan 0 */
+  padding: 10px 0; 
   /* atur padding dengan flex */
   height: 45px;
   align-items: center;
-  color: whitesmoke;
+  color: rgb(255, 255, 255);
 }
 nav ul {
   display: flex;
   list-style: none;
-  width: 40%;
+  width: 50%;
   justify-content: space-between;
   transition: all 0.4s;
 }
 nav .logo {
-  font-family: "Srisakdi", cursive;
-  letter-spacing: 3px; /*space antar char*/
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 1px; /*space antar char*/
+  
+}
+
+nav .logo a{
+  text-decoration: none;
+  color: white;
 }
 
 nav ul li a {
   text-decoration: none;
   color: white;
-  font-size: 0.9rem;
+  font-size: 0.9rem; 
 }
 
 nav ul li a:hover {
-  color: teal;
+  color: rgb(6, 8, 8);
+  font-size: larger;
 }
   /* hamburger menu */
   .menu-toggle{
@@ -89,20 +96,21 @@ nav ul li a:hover {
   }
 
   .image {
-   
+    margin-top: 60px;
+    margin-bottom: -60px;
+    text-align: center;
     width: 100%;
     height: auto;  
-    max-width: 140px;
-    display: block;
+    max-width: 250px;
+    display: flex;
     margin-left: auto;
     margin-right: auto;
+    border-radius: 50%;
 }
 
 .container {
     display: flex;
     flex-direction: column;
-
-    border: 2px solid blue;
     padding: 8px;
     border-radius: 5px;
     margin: 0 auto;
@@ -117,35 +125,166 @@ main {
     margin: 5px;
     padding: 10px;
     border-radius: 5px;
+    overflow: hidden;
 }
 /* supaya ada jarak antar box  */
 .flexone{
 flex-grow: 1;
+overflow: hidden;
 }
-.flextwo{
-    flex-grow: 2;
-    }
-footer {
-    text-align: center;
-}
-h2 {
-  
-    text-align: center;
-    color: brown;
-    text-justify: inter-word;
-    word-wrap: break-word;
 
+.flextwo{
+  flex-grow: 2;
+  width: 100%;
+  overflow: hidden;
+}
+
+.AboutMe{
+  background-color: #9ACD32;
+  margin-top: -4px;
+}
+
+.MottoHidup p{
+  background-color: white;
+  color: black;
+}
+
+.MottoHidup h2{
+  color: black;
+}
+
+
+.Hobbies{
+  background-color: #9ACD32;
+  margin-top: -4px;
+  margin-bottom: -10px;
+}
+
+.bungkusHobi{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: space-between;
+  margin: 10px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+figcaption{
+  color: white;
+}
+
+img{
+  width: 150px;
+}
+
+.Hobbies img:hover{
+  width: 175px;
+}
+
+.HardSkill h2{
+  color: black;
+
+}
+
+.HardSkill figcaption{
+  color: black;
+}
+
+.HardSkill img{
+  width: 150px;
+}
+
+.HardSkill img:hover{
+  width: 175px;
+}
+
+.LessonsLearn {
+  background-color: #9ACD32;
+  margin-top: -4px;
+}
+
+
+.Hope h2{
+  color: black;
+}
+
+.Hope li{
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.BungkusGallery{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.Gallery img{
+  width: 200px;
+}
+
+.Gallery img:hover{
+  width: 500px;
+}
+
+.BungkusVideo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.Gallery{
+  background-color: #9ACD32;
+  margin-top: -4px;
+}
+
+h2 {
+  text-align: center;
+  color: white;
+  margin-bottom: 30px;
+  text-justify: inter-word;
+  word-wrap: break-word;
+  
+}
+
+.Domisili h2{
+  color: black;
+}
+
+.BungkusDomisili{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 h5 {
   text-align: center;
-  color: red;
+  color: rgb(11, 99, 46);
   word-wrap: break-word;
- 
+  
 }
 p {
-    text-align: justify;
-    text-justify: inter-word;
+  font-size: 18px;
+  text-align: center;
+  text-justify: inter-word;
+  color: white;
+  padding: 20px;
+  padding-top: -20px;
+  margin-top: -20px;
+  margin-right: 50px;
+  margin-left: 50px;
 }
+
+footer{
+  margin-top: -4px;
+  background-color: #9ACD32;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
 @media screen and (max-width: 768px) {
     nav ul{
       width: 50%;
