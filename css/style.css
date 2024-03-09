@@ -4,7 +4,7 @@
 }
 body {
   font-family: Georgia, 'Times New Roman', Times, serif;
-  overflow-x: hidden;
+  overflow: auto;
 }
 /*navbar*/
 nav {
@@ -45,6 +45,7 @@ nav ul li a {
 nav ul li a:hover {
   color: rgb(6, 8, 8);
   font-size: larger;
+  transition: .5s;
 }
   /* hamburger menu */
   .menu-toggle{
@@ -68,7 +69,7 @@ nav ul li a:hover {
      display: block;
      width: 21px;
      height: 2px;
-     background-color: whitesmoke;
+     background-color:darkgreen;
      border-radius: 3px;
      transition: all 0.7s;
  }
@@ -101,7 +102,7 @@ nav ul li a:hover {
     margin-bottom: -60px;
     text-align: center;
     width: 100%;
-    height: auto;  
+    height: auto; 
     max-width: 250px;
     display: flex;
     margin-left: auto;
@@ -199,12 +200,12 @@ img{
 }
 
 .Hobbies img:hover{
-  width: 175px;
+  transform: scale(1.2);
+  transition: .5s;
 }
 
 .HardSkill h2{
   color: black;
-
 }
 
 .HardSkill figcaption{
@@ -216,7 +217,8 @@ img{
 }
 
 .HardSkill img:hover{
-  width: 175px;
+  transform: scale(1.2);
+  transition: .5s;
 }
 
 .LessonsLearn {
@@ -247,7 +249,8 @@ img{
 }
 
 .Gallery img:hover{
-  width: 500px;
+  transform: scale(1.5);
+  transition: .7s;
 }
 
 .BungkusVideo{
@@ -273,10 +276,14 @@ h2 {
   color: black;
 }
 
-.BungkusDomisili{
+.BungkusDomisili {
+  width: 60%;
+ 
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column; /* Mengatur arah fleks ke vertikal */
+  justify-content: center; /* Mengatur posisi vertikal ke tengah */
+  align-items: center; /* Mengatur posisi horizontal ke tengah */
+  margin: 0 auto; /* Mengatur margin kiri dan kanan ke auto untuk posisi tengah horizontal */
 }
 h5 {
   text-align: center;
@@ -327,7 +334,7 @@ footer{
       height: 100vh;
       justify-content:space-evenly;
       align-items: center;
-      background-color: coral;
+      background-color: rgb(53, 77, 6);
       /* transform: translateX(100%);  */
       transition: all 0.72s;
       opacity: 0;
