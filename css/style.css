@@ -336,7 +336,7 @@ footer{
     }
   }
 
-  @media screen and (max-width: 576px) {
+  @media screen and (max-width: 1015px) {
    .menu-toggle{
        display: flex;
    }
