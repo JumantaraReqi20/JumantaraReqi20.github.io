@@ -2,112 +2,16 @@
 <html lang="en">
   <head>
     <title>Daftar Berita</title>
-    <style>
-      body {
-        text-align: center;
-        justify-content: center;
-        align-items: center;
-        background-color: #f2f2f2;
-        font-family: Arial, sans-serif;
-      }
-      
-      table {
-        border-collapse: collapse;
-        width: 100%;
-        max-width: 100%;
-        font-family: Arial, sans-serif;
-      }
-      
-      th, td {
-        text-align: center;
-        padding: 12px;
-        border-bottom: 1px solid #ddd;
-        width: auto;
-      }
-
-      td[id^="news-title"] {
-        text-align: left;
-      }
-      
-      td[id^="news-time"] {
-        width: 20%;
-      }
-
-      th {
-        background-color: #4CAF50;
-        color: white;
-      }
-      
-      tr:nth-child(even) {
-        background-color: #f2f2f2;
-      }
-      
-      tr:hover {
-        background-color: #e6e6e6;
-      }
-      
-      .container {
-        align-items: center;
-        max-width: 80%;
-        width: 100%;
-        text-align: center;
-        margin: 50px auto;
-        background-color: white;
-        padding: 30px;
-        border-radius: 8px;
-        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
-        overflow-x: auto;
-      }
-      
-      h1 {
-        color: #4CAF50;
-        margin-bottom: 30px;
-      }
-
-      .source {
-        font-style: normal;
-        text-decoration: none;
-        color: rgb(31, 175, 108);
-      }
-
-      h4 a{
-        color: #4CAF50;
-      }
-
-      @media (max-width: 768px) {
-        table {
-          font-size: 14px;
-        }
-      
-        th, td {
-          padding: 8px;
-        }
-      
-        .container {
-          max-width: 90%;
-        }
-      }
-      
-      @media (max-width: 480px) {
-        table {
-          font-size: 12px;
-        }
-      
-        th, td {
-          padding: 6px;
-        }
-      
-        .container {
-          max-width: 95%;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
   </head>
+
   <body>
     <div class="container">
       <h1>Daftar Berita Terkini</h1>
-      <h3>Di bawah ini merupakan daftar berita terbaru yang dapat diakses pada web <a href="https://www.republika.co.id/" class="source">Republika.co.id</a></h3>
+      <h3>Di bawah ini merupakan daftar berita terbaru yang dapat diakses pada web 
+        <a href="https://www.republika.co.id/" class="source">Republika.co.id</a></h3>
         <table id="news-table">
           <thead>
             <tr>
@@ -120,26 +24,9 @@
           </thead>
           <tbody></tbody>
         </table>
-        <footer>
-          <h4><a href="/index.html">Back to Home Page</a></h4>
-        </footer>
-    </div>
-
-    <script type="text/javascript">
-      $(function() {
-        $.get('/data/data.json', function(obj) {
-          var str = "";
-          $.each(obj, function(n, data) {
-            str += "<tr>";
-            str += "<td>" + (n + 1) + "</td>";
-            str += "<td id='news-title'>" + data['judul'] + "</td>";
-            str += "<td>" + data['kategori'] + "</td>";
-            str += "<td id='news-time'>" + data['waktu_publish'].replace(/\n/g, "<br>") + "</td>";
-            str += "<td id='news-time'>" + data['waktu_scraping'].replace(/\n/g, "<br>") + "</td>";
-            str += "</tr>";
-          });
-          $('#news-table tbody').html(str);
-        });
-      });
-    </script>
+      </div>
+  </body> 
   
+  <footer>
+    <h4><a href="/index.html">Back to Home Page</a></h4>
+  </footer>
