@@ -3,8 +3,9 @@ from bs4 import BeautifulSoup
 import json
 import os
 from datetime import datetime
-import time
+from dateutil.parser import parse as strptime_best
 import pathlib
+import hashlib
 
 def scrape_news():
     url = "https://www.republika.co.id/"
@@ -24,9 +25,9 @@ def scrape_news():
         category = item.find("span", class_="kanal-info").text.strip()
         publish_time_str1 = item.find('div', class_ = 'date').text.split('-')
         publish_time_str = publish_time_str1[1].strip()
-
+        
         scrape_time = datetime.now()
-        publish_time = datetime.strptime(publish_time_str, "%d %B %Y, %H:%M")
+        publish_time = strptime_best(publish_time_str)
         time_diff = scrape_time - publish_time
 
         if time_diff.days > 0:
@@ -38,7 +39,11 @@ def scrape_news():
         elif time_diff.seconds % 60 > 0:
             time_ago = f"{time_diff.seconds % 60} detik yang lalu"
             
-        news_hash = hash((title, publish_time_str))
+        # Menghasilkan hash_code yang stabil
+        hash_object = hashlib.sha1()
+        hash_object.update(title.encode('utf-8'))
+        hash_object.update(publish_time_str.encode('utf-8'))
+        news_hash = hash_object.hexdigest()
         
         news_info = {
             "judul": title,
@@ -66,9 +71,24 @@ def save_to_json(data, filename="data.json"):
 
         # Temukan item berita yang belum ada
         new_data = [item for item in data if item["hash_code"] not in [x["hash_code"] for x in existing_data]]
-
+        
+        # Ubah waktu publish agar update dengan waktu nyata (real-time)
+        for item in existing_data:
+            publish_time = strptime_best(item["waktu_publish"].split('\n')[1])
+            time_diff = datetime.now() - publish_time
+            if time_diff.days > 0:
+                time_ago = f"{time_diff.days} hari yang lalu"
+            elif time_diff.seconds // 3600 > 0:
+                time_ago = f"{time_diff.seconds // 3600} jam yang lalu"
+            elif time_diff.seconds // 60 > 0:
+                time_ago = f"{time_diff.seconds // 60} menit yang lalu"
+            elif time_diff.seconds % 60 > 0:
+                time_ago = f"{time_diff.seconds % 60} detik yang lalu"
+            item["waktu_publish"] = f"{time_ago}\n{item['waktu_publish'].split('\n')[1]}"
+        
         # Tambahkan data baru ke data yang sudah ada
-        all_data = existing_data + new_data
+        all_data = existing_data
+        all_data.extend(new_data)
         
         # Mengurutkan data sebelum disimpan
         sorted_data = sorted(all_data, key=lambda x: x['waktu_real_publish'], reverse=True)
@@ -81,9 +101,7 @@ def save_to_json(data, filename="data.json"):
     except Exception as e:
         print(f"Error saving data to {file_path}: {e}")
 
-if __name__ == "__main__":
-    while True:
-        news_data = scrape_news()
-        save_to_json(news_data)
-        # print("Waiting 1 minutes before scraping again...")
-        # time.sleep(600)  # Wait 10 minutes before scraping again
+
+if __name__=="__main__":
+    news_data = scrape_news()
+    save_to_json(news_data)
