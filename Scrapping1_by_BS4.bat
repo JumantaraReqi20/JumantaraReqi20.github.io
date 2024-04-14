@@ -7,4 +7,3 @@ set PYTHON_SCRIPT="C:\POLITEKNIK NEGERI BANDUNG\SEMESTER 2\Proyek 1\Praktik\Pert
 
 REM Jalankan program Python
 %PYTHON_PATH% %PYTHON_SCRIPT%
-
