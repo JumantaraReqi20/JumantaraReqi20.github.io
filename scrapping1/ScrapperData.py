@@ -25,19 +25,21 @@ def scrape_news():
         category = item.find("span", class_="kanal-info").text.strip()
         publish_time_str1 = item.find('div', class_ = 'date').text.split('-')
         publish_time_str = publish_time_str1[1].strip()
-        
         scrape_time = datetime.now()
-        publish_time = strptime_best(publish_time_str)
-        time_diff = scrape_time - publish_time
+        if 'lalu' in publish_time_str:
+            time_ago = publish_time_str
+        else:
+            publish_time = strptime_best(publish_time_str)
+            time_diff = scrape_time - publish_time
 
-        if time_diff.days > 0:
-            time_ago = f"{time_diff.days} hari yang lalu"
-        elif time_diff.seconds // 3600 > 0:
-            time_ago = f"{time_diff.seconds // 3600} jam yang lalu"
-        elif time_diff.seconds // 60 > 0:
-            time_ago = f"{time_diff.seconds // 60} menit yang lalu"
-        elif time_diff.seconds % 60 > 0:
-            time_ago = f"{time_diff.seconds % 60} detik yang lalu"
+            if time_diff.days > 0:
+                time_ago = f"{time_diff.days} hari yang lalu"
+            elif time_diff.seconds // 3600 > 0:
+                time_ago = f"{time_diff.seconds // 3600} jam yang lalu"
+            elif time_diff.seconds // 60 > 0:
+                time_ago = f"{time_diff.seconds // 60} menit yang lalu"
+            elif time_diff.seconds % 60 > 0:
+                time_ago = f"{time_diff.seconds % 60} detik yang lalu"
             
         # Menghasilkan hash_code yang stabil
         hash_object = hashlib.sha1()
@@ -48,10 +50,10 @@ def scrape_news():
         news_info = {
             "judul": title,
             "kategori": category,
-            "waktu_publish": f"{time_ago}\n{publish_time_str}",
+            "waktu_publish": time_ago,
             "waktu_scraping": scrape_time.strftime("%H:%M:%S\n%A, %d %B %Y"),
             "hash_code": news_hash,
-            "waktu_real_publish" : publish_time.isoformat(),
+            "waktu_real_publish" : scrape_time.strftime("%H:%M:%S\n%A, %d %B %Y"),
         }
         news_data.append(news_info)
 
@@ -72,19 +74,26 @@ def save_to_json(data, filename="data.json"):
         # Temukan item berita yang belum ada
         new_data = [item for item in data if item["hash_code"] not in [x["hash_code"] for x in existing_data]]
         
+        
+        '''Jika waktu yang disediakan oleh aplikasi dalam bentuk tanggal(bukan .... menit yang lalu)'''
         # Ubah waktu publish agar update dengan waktu nyata (real-time)
-        for item in existing_data:
-            publish_time = strptime_best(item["waktu_publish"].split('\n')[1])
-            time_diff = datetime.now() - publish_time
-            if time_diff.days > 0:
-                time_ago = f"{time_diff.days} hari yang lalu"
-            elif time_diff.seconds // 3600 > 0:
-                time_ago = f"{time_diff.seconds // 3600} jam yang lalu"
-            elif time_diff.seconds // 60 > 0:
-                time_ago = f"{time_diff.seconds // 60} menit yang lalu"
-            elif time_diff.seconds % 60 > 0:
-                time_ago = f"{time_diff.seconds % 60} detik yang lalu"
-            item["waktu_publish"] = f"{time_ago}\n{item['waktu_publish'].split('\n')[1]}"
+        # for item in existing_data:
+        #     publish_time_str = item["waktu_publish"].split('\n')
+        #     if len(publish_time_str) == 2:
+        #         publish_time = strptime_best(publish_time_str[1])
+        #     else:
+        #         publish_time = strptime_best(item["waktu_publish"])
+
+        #     time_diff = datetime.datetime.now() - publish_time
+        #     if time_diff.days > 0:
+        #         time_ago = f"{time_diff.days} hari yang lalu"
+        #     elif time_diff.seconds // 3600 > 0:
+        #         time_ago = f"{time_diff.seconds // 3600} jam yang lalu"
+        #     elif time_diff.seconds // 60 > 0:
+        #         time_ago = f"{time_diff.seconds // 60} menit yang lalu"
+        #     elif time_diff.seconds % 60 > 0:
+        #         time_ago = f"{time_diff.seconds % 60} detik yang lalu"
+        #     item["waktu_publish"] = f"{time_ago}\n{item['waktu_publish'].split('\n')[1]}"
         
         # Tambahkan data baru ke data yang sudah ada
         all_data = existing_data
