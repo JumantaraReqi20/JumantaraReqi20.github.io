@@ -26,6 +26,7 @@ def scrape_news():
         publish_time_str1 = item.find('div', class_ = 'date').text.split('-')
         publish_time_str = publish_time_str1[1].strip()
         scrape_time = datetime.now()
+        # Ditambahkan pengecekan karena ternyata 'waktu publish' yang disediakan website beritanya berubah-ubah
         if 'lalu' in publish_time_str:
             time_ago = publish_time_str
         else:
@@ -44,7 +45,6 @@ def scrape_news():
         # Menghasilkan hash_code yang stabil
         hash_object = hashlib.sha1()
         hash_object.update(title.encode('utf-8'))
-        hash_object.update(publish_time_str.encode('utf-8'))
         news_hash = hash_object.hexdigest()
         
         news_info = {
