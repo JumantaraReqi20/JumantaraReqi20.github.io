@@ -45,6 +45,7 @@ def scrape_news():
         # Menghasilkan hash_code yang stabil
         hash_object = hashlib.sha1()
         hash_object.update(title.encode('utf-8'))
+        hash_object.update(category.encode('utf-8'))
         news_hash = hash_object.hexdigest()
         
         news_info = {
